@@ -14,7 +14,9 @@ def open_app(app_name):
         return f"Sorry Boss, I couldn't find '{app_name}'."
     try:
         subprocess.Popen(
-            ["gtk-launch", desktop_id]
+            ["gtk-launch", desktop_id],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL
         )
         return f"Opening {display_name}..."
     except Exception as e:
