@@ -3,6 +3,7 @@ from agents.llm_agent import llm_agent
 from agents.weather_agent import weather_agent
 from agents.app_agent import app_agent
 from agents.close_app_agent import close_app_agent
+from agents.memory_agent import memory_agent
 
 
 def extract_city(user_input):
@@ -89,6 +90,12 @@ def coordinator_agent(user_input):
 
         if app_name:
             return app_agent(app_name)
+
+    # Memory routing
+    memory_response = memory_agent(user_input)
+
+    if memory_response is not None:
+        return memory_response
 
     # Default LLM Agent
     return llm_agent(user_input)
