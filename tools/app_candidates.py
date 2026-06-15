@@ -1,4 +1,4 @@
-# it is for merjing the output from the window matcher and process matcher
+# it is for merging the output from the window matcher and process matcher
 from tools.window_scanner import (
     get_visible_windows
 )

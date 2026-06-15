@@ -1,7 +1,9 @@
+# it is used for coordinating all the agents and tools are called from the agents
+
+from agents.open_agent import open_agent
 from agents.system_agent import system_agent
 from agents.llm_agent import llm_agent
 from agents.weather_agent import weather_agent
-from agents.app_agent import app_agent
 from agents.close_app_agent import close_app_agent
 from agents.memory_agent import memory_agent
 
@@ -23,11 +25,7 @@ def extract_city(user_input):
     return None
 
 
-def extract_app(user_input):
-    if user_input.startswith("open "):
-        return user_input.replace("open ", "").strip()
 
-    return None
 
 
 def extract_close_app(user_input):
@@ -85,11 +83,12 @@ def coordinator_agent(user_input):
             return close_app_agent(app_name)
 
     # App Launcher Routing
-    if user_input.startswith("open "):
-        app_name = extract_app(user_input)
-
-        if app_name:
-            return app_agent(app_name)
+    if (
+            user_input.startswith("open ")
+            or user_input == "more"
+            or user_input.isdigit()
+    ):
+        return open_agent(user_input)
 
     # Memory routing
     memory_response = memory_agent(user_input)

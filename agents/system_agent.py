@@ -1,3 +1,4 @@
+# it is responsible for doing all the system related work
 from tools.system_tool import get_system_info
 
 def system_agent():
