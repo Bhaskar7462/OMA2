@@ -6,7 +6,7 @@ from agents.llm_agent import llm_agent
 from agents.weather_agent import weather_agent
 from agents.close_app_agent import close_app_agent
 from agents.memory_agent import memory_agent
-
+from agents.window_control_agent import handle_window_control
 
 def extract_city(user_input):
     keywords = [
@@ -81,6 +81,20 @@ def coordinator_agent(user_input):
 
         if app_name:
             return close_app_agent(app_name)
+
+    # Window Control Routing
+    window_control_keywords = [
+        "maximize",
+        "minimize",
+        "restore",
+        "focus"
+    ]
+
+    for keyword in window_control_keywords:
+        if user_input.startswith(keyword + " "):
+            return handle_window_control(user_input)
+
+
 
     # App Launcher Routing
     if (

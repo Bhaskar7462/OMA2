@@ -3,7 +3,7 @@ import time
 
 
 def ask_llm(prompt):
-    print("🤖 Thinking...")
+    print(" Thinking...")
     start_time = time.time()
 
     response = chat(
